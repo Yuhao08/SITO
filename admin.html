@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amministrazione progetti</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Pagina amministratore</h1>
+      <p>Accedi per caricare i progetti.</p>
+
+      <section id="login-section">
+        <form id="login-form" class="card">
+          <label for="username">Nome utente</label>
+          <input id="username" name="username" type="text" required />
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" required />
+
+          <button type="submit" class="button">Accedi</button>
+          <p id="login-error" class="error" role="alert" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="upload-section" hidden>
+        <form id="project-form" class="card">
+          <label for="project-name">Nome progetto</label>
+          <input id="project-name" name="name" type="text" required />
+
+          <label for="project-url">URL download progetto</label>
+          <input id="project-url" name="url" type="url" placeholder="https://..." required />
+
+          <button type="submit" class="button">Carica progetto</button>
+          <p id="project-success" class="success" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="footer-actions">
+        <a href="index.html" class="button secondary">Torna ai progetti</a>
+        <a href="https://www.altervista.org" target="_blank" rel="noopener" class="button">Altervista</a>
+        <a href="https://github.com" target="_blank" rel="noopener" class="button">GitHub</a>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

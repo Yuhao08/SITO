@@ -29,8 +29,11 @@
           <label for="project-name">Nome progetto</label>
           <input id="project-name" name="name" type="text" required />
 
-          <label for="project-url">URL download progetto</label>
-          <input id="project-url" name="url" type="url" placeholder="https://..." required />
+          <label for="project-url">URL download progetto (opzionale)</label>
+          <input id="project-url" name="url" type="url" placeholder="https://..." />
+
+          <label for="project-file">Oppure carica un file .zip dal computer</label>
+          <input id="project-file" name="file" type="file" accept=".zip,application/zip" />
 
           <button type="submit" class="button">Carica progetto</button>
           <p id="project-success" class="success" role="status" aria-live="polite"></p>

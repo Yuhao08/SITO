@@ -32,6 +32,18 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
   }
 
+  function normalizeProjectUrl(rawUrl) {
+    try {
+      const parsed = new URL(rawUrl);
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+        return null;
+      }
+      return parsed.toString();
+    } catch (_error) {
+      return null;
+    }
+  }
+
   function renderProjects() {
     const list = document.getElementById('project-list');
     const emptyState = document.getElementById('empty-state');
@@ -52,9 +64,14 @@
       const title = document.createElement('span');
       title.textContent = project.name;
 
+      const safeUrl = normalizeProjectUrl(project.url);
+      if (!safeUrl) {
+        return;
+      }
+
       const link = document.createElement('a');
       link.textContent = 'Scarica';
-      link.href = project.url;
+      link.href = safeUrl;
       link.className = 'button';
       link.target = '_blank';
       link.rel = 'noopener';
@@ -95,14 +112,15 @@
       event.preventDefault();
       const name = String(projectForm.name.value || '').trim();
       const url = String(projectForm.url.value || '').trim();
+      const safeUrl = normalizeProjectUrl(url);
 
-      if (!name || !url) {
-        success.textContent = '';
+      if (!name || !safeUrl) {
+        success.textContent = 'Inserisci un URL valido (http/https).';
         return;
       }
 
       const projects = getProjects();
-      projects.push({ name: name, url: url });
+      projects.push({ name: name, url: safeUrl });
       saveProjects(projects);
       projectForm.reset();
       success.textContent = 'Progetto caricato con successo.';
